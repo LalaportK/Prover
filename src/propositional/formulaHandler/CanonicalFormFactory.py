@@ -1,38 +1,23 @@
-from distutils.errors import PreprocessError
-from .Atom import Atom
-from .Conjunction import Conjunction
-from .Disjunction import Disjunction
-from .Negation import Negation
-from .PropositionalLogicBase import PropositionalLogicBase
-from .To import To
+from logicParser.nodes.PropositionalLogicBase import *
+from logicParser.nodes.Atom import *
+from logicParser.nodes.Conjunction import *
+from logicParser.nodes.Disjunction import *
+from logicParser.nodes.Negation import *
+from logicParser.nodes.To import *
 
+class CanonicalFormFactory:
+    def __init__(self):
+        pass
 
-class Formula(PropositionalLogicBase):
-    def __init__(self, formula: PropositionalLogicBase):
-        self.formula = formula
-    
-    def getFormula(self) -> PropositionalLogicBase:
-        return self.formula.getFormula()
-
-    def getDeepCopy(self) -> PropositionalLogicBase:
-        """
-        Returns
-        ------
-        deepCopy : PropositionalLogicBase
-            A deepCopy of this formula.
-        """
-        return self.formula.getDeepCopy()
-
-    def getCNF(self) -> PropositionalLogicBase:
+    def getCNF(self, formula: PropositionalLogicBase) -> PropositionalLogicBase:
         """
         Calculates CNF of this formula.
-
         Returns
         ------
         expanded : PropositionalLogicBase
             CNF of this formula.
         """
-        preProcessed = self.__canonicalPreProcess(self.formula.getDeepCopy())
+        preProcessed = self.__canonicalPreProcess(formula.getDeepCopy())
         expanded = self.__expandOr(preProcessed)
         return expanded
 
@@ -67,7 +52,7 @@ class Formula(PropositionalLogicBase):
         print("expanded : " + expanded.getFormula())
         return expanded
 
-    def getDNF(self) -> PropositionalLogicBase:
+    def getDNF(self, formula: PropositionalLogicBase) -> PropositionalLogicBase:
         """
         Calculates DNF of this formula.
 
@@ -76,7 +61,7 @@ class Formula(PropositionalLogicBase):
         expanded : PropositionalLogicBase
             DNF of this formula.
         """
-        preProcessed = self.__canonicalPreProcess(self.formula.getDeepCopy())
+        preProcessed = self.__canonicalPreProcess(formula.getDeepCopy())
         expanded = self.__expandAnd(preProcessed)
         return expanded
 

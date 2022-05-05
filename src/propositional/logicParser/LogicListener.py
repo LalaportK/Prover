@@ -1,12 +1,12 @@
 # Generated from grammar\Logic.g4 by ANTLR 4.10.1
 from antlr4 import *
 
-from nodes.Atom import Atom
-from nodes.Negation import Negation
-from nodes.Conjunction import Conjunction
-from nodes.To import To
-from nodes.Stack import Stack
-from nodes.Disjunction import Disjunction
+from .nodes.Atom import Atom
+from .nodes.Negation import Negation
+from .nodes.Conjunction import Conjunction
+from .nodes.To import To
+from .nodes.Stack import Stack
+from .nodes.Disjunction import Disjunction
 if __name__ is not None and "." in __name__:
     from .LogicParser import LogicParser
 else:
