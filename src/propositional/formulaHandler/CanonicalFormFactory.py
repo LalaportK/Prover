@@ -4,10 +4,20 @@ from logicParser.nodes.Conjunction import *
 from logicParser.nodes.Disjunction import *
 from logicParser.nodes.Negation import *
 from logicParser.nodes.To import *
+from logicParser.nodes.ExtendedBinOpBase import ExtendedBinOpBase
+from logicParser.nodes.ExtendedConjunction import ExtendedConjunction
+from logicParser.nodes.ExtendedDisjunction import ExtendedDisjunction
 
 class CanonicalFormFactory:
     def __init__(self):
         pass
+
+    def getExtendedCNF(self, formula: PropositionalLogicBase) -> ExtendedBinOpBase:
+        return ExtendedConjunction(self.getCNF(formula))
+
+    def getExtendedDNF(self, formula: PropositionalLogicBase) -> ExtendedBinOpBase:
+        return ExtendedDisjunction(self.getDNF(formula))
+
 
     def getCNF(self, formula: PropositionalLogicBase) -> PropositionalLogicBase:
         """
